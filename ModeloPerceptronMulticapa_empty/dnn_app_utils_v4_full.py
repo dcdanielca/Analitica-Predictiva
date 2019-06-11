@@ -700,7 +700,7 @@ def L_model_forward(X, parameters):
     
     ## FIN ###
 
-    assert(AL.shape == (1,X.shape[1]))
+    assert(AL.shape == (10,X.shape[1]))
             
     return AL, caches
 
