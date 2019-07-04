@@ -251,7 +251,7 @@ def compute_cost(Z4, Y):
 ########################################################
 #    
 # 
-def model(X_train, Y_train, X_test, Y_test, learning_rate = 0.009, num_epochs = 5, minibatch_size = 16, print_cost = True):
+def model(X_train, Y_train, X_test, Y_test, learning_rate = 0.009, num_epochs = 200, minibatch_size = 16, print_cost = True):
     """
     Implementa una Red Neuronal Convolucional de 3-Capas en Tensorflow:
     CONV2D -> RELU -> MAXPOOL -> CONV2D -> RELU -> MAXPOOL -> FLATTEN -> FULLYCONNECTED
