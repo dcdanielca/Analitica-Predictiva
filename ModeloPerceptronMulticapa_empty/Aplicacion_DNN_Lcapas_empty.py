@@ -22,9 +22,9 @@ plt.rcParams['image.cmap'] = 'gray'
 np.random.seed(1)
 
 
-train_x_orig, train_y, test_x_orig, test_y = load_dataset_mnist() 
+#train_x_orig, train_y, test_x_orig, test_y = load_dataset_mnist() 
 #train_x_orig, train_y, test_x_orig, test_y = load_dataset_mnist_2classes()     # Cargar la base de datos de MNIST
-#train_x_orig, train_y, test_x_orig, test_y, classes = load_data_aplication()  # Cargar la base de datos de la aplicación
+train_x_orig, train_y, test_x_orig, test_y, classes = load_data_aplication()  # Cargar la base de datos de la aplicación
 
 # Visualizar uno de los ejemplos de la base de datos
 index = 11                              # ejemplo 11
