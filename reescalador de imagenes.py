@@ -7,6 +7,7 @@ Created on Thu Jul  4 10:24:56 2019
 """
 import cv2
 import os
+import h5py
 
 for img_file in os.listdir('/home/daniel/Escritorio/Monitor/'):
     try:
@@ -18,3 +19,6 @@ for img_file in os.listdir('/home/daniel/Escritorio/Monitor/'):
         print('ERROR------ ' + img_file)
         print(ex)
         continue
+    
+h5_file = h5py.File('monitor.h5', 'w')
+h5_file.create_dataset('/monitor', data=os.)

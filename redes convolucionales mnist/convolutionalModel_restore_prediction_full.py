@@ -18,6 +18,17 @@ from tensorflow.python.framework import ops
 from cnn_utils import *
 import cv2
 
+X_train_orig, Y_train_orig, X_test_orig, Y_test_orig, classes = load_dataset_mnist()      # Cargar la base de datos
+
+
+## imprimir características de la base de datos
+X_train = X_train_orig/255.
+X_test = X_test_orig/255.
+
+X_test = X_test.reshape(X_test.shape[0], X_test.shape[1], X_test.shape[2], 1)
+X_train = X_train.reshape(X_train.shape[0], X_train.shape[1], X_train.shape[2], 1)
+Y_train = Y_train_orig.T
+Y_test = Y_test_orig.T
 
 def create_placeholders(n_H0, n_W0, n_C0, n_y):
     """
@@ -72,7 +83,7 @@ def initialize_parameters():
         
     #### Haga su código acá ### (≈2 lines)
         
-    W1 = tf.get_variable("W1", [4, 4, 3, 8], initializer= tf.contrib.layers.xavier_initializer(seed=0))
+    W1 = tf.get_variable("W1", [4, 4, 1, 8], initializer= tf.contrib.layers.xavier_initializer(seed=0))
     W2 = tf.get_variable("W2", [2, 2, 8, 16], initializer= tf.contrib.layers.xavier_initializer(seed=0))
     
     ### Fin ###
@@ -155,7 +166,7 @@ def forward_propagation(X, parameters):
 #    # 6 neurons in output layer. Hint: one of the arguments should be "activation_fn=None" 
     
     Z3 = tf.contrib.layers.fully_connected(F,20,None)
-    Z4 = tf.contrib.layers.fully_connected(Z3,6,None)
+    Z4 = tf.contrib.layers.fully_connected(Z3,10,None)
     
     ### Fin ###
 
@@ -201,7 +212,7 @@ def compute_cost(Z4, Y):
     
     ### Fin ###
     
-    return cost  
+    return cost 
    
  
 def model_predict(data_test, y_label, learning_rate = 0.009, num_epochs = 100, minibatch_size = 10, print_cost = True):
@@ -258,13 +269,13 @@ def model_predict(data_test, y_label, learning_rate = 0.009, num_epochs = 100, m
         return prediccion
     
     
-img = cv2.imread("figura2.png")
-img = cv2.resize(img, (64, 64), interpolation=cv2.INTER_CUBIC)#
-img_test = img/255.
-img_test=img_test[np.newaxis,...]
+#img = cv2.imread("figura2.png")
+#img = cv2.resize(img, (64, 64), interpolation=cv2.INTER_CUBIC)#
+#img_test = img/255.
+#img_test=img_test[np.newaxis,...]
 
-y_label= np.array([2])
-y_label = convert_to_one_hot(y_label, 6).T
+#y_label= np.array([2])
+#y_label = convert_to_one_hot(y_label, 6).T
 #
-prediccion = model_predict(img_test, y_label)
+prediccion = model_predict(X_test, Y_test)
 
