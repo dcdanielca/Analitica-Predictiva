@@ -67,8 +67,8 @@ def initialize_parameters():
         
     #### Haga su código acá ### (≈2 lines)
         
-    W1 = tf.get_variable("W1", [4, 4, 3,8], initializer = tf.contrib.layers.xavier_initializer(seed = 0))
-    W2 = tf.get_variable("W2", [2, 2, 8 , 16], initializer = tf.contrib.layers.xavier_initializer(seed = 0))
+    W1 = tf.get_variable("W1", [4, 4, 3, 32], initializer = tf.contrib.layers.xavier_initializer(seed = 0))
+    W2 = tf.get_variable("W2", [2, 2, 32, 48], initializer = tf.contrib.layers.xavier_initializer(seed = 0))
     
     ### Fin ###
 
@@ -148,9 +148,9 @@ def forward_propagation(X, parameters):
     
 #    # FULLY-CONNECTED without non-linear activation function (not not call softmax).
 #    # 6 neurons in output layer. Hint: one of the arguments should be "activation_fn=None" 
+    Z3 = tf.contrib.layers.fully_connected(F, 30, None)
     
-    Z3 = tf.contrib.layers.fully_connected(F, 20, None)
-    Z4 = tf.contrib.layers.fully_connected(Z3, 4, None)
+    Z4 = tf.contrib.layers.fully_connected(Z3, 7, None)
     
     ### Fin ###
 
@@ -232,7 +232,7 @@ def model_predict(data_test, y_label, learning_rate = 0.009, num_epochs = 100, m
     
     # Forward propagation: Construir el forward propagation en el grafo de tensorflow
     
-    Z3 = forward_propagation(X, parameters)
+    Z4 = forward_propagation(X, parameters)
             
     saver = tf.train.Saver()
      
@@ -242,7 +242,7 @@ def model_predict(data_test, y_label, learning_rate = 0.009, num_epochs = 100, m
         saver.restore(sess, "model_softmax.ckpt")        
         print("Model restored.")        
                
-        predict_op = tf.nn.softmax(Z3)  # Apply softmax to logits
+        predict_op = tf.nn.softmax(Z4)  # Apply softmax to logits
         
         # Calcular la predicción 
       
@@ -258,7 +258,7 @@ img_test = img/255.
 img_test=img_test[np.newaxis,...]
 
 y_label= np.array([2])
-y_label = convert_to_one_hot(y_label, 4).T
+y_label = convert_to_one_hot(y_label, 7).T
 #
 prediccion = model_predict(img_test, y_label)
 

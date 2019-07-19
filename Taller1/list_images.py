@@ -21,8 +21,10 @@ train_path = 'Base de datos/*'
 # read addresses and labels from the 'train' folder
 addrs = glob.glob(train_path)
 
-labels = [0 if 'maletin' in addr else 1 if 'monitor' in addr else 2 if 'notebook' in addr else 3 for addr in addrs]  
-# 0 = maletin, 1 = monitor, 2 = notebook, 3 = usb
+labels = [0 if 'agenda' in addr else 1 if 'cinta' in addr else 2 if 'lapicero' in addr 
+          else 3 if 'maletin' in addr else 4 if 'monitor' in addr else 5 if 'notebook' in addr else 6 for addr in addrs]  
+# 0 = agenda, 1 = cinta, 2 = lapicero, 3 = maletin, 4 = monitor, 5 = notebook, 6 = usb
+
 # to shuffle data
 if shuffle_data:
     c = list(zip(addrs, labels))
@@ -72,7 +74,10 @@ for i in range(len(train_addrs)):#for i in range(len(train_addrs)):
     # cv2 load images as BGR, convert it to RGB
     addr = train_addrs[i]
     img = cv2.imread(addr)
-    img = cv2.resize(img, (64, 64), interpolation=cv2.INTER_CUBIC)#
+    try:
+        img = cv2.resize(img, (64, 64), interpolation=cv2.INTER_CUBIC)#
+    except:
+        print(addr)
 #    img = cv2.cvtColor(img, cv2.COLOR_BGR2BGR)
 #    cv2.imshow("image",img)
 #    k=cv2.waitKey()

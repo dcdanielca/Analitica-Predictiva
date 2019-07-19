@@ -35,8 +35,8 @@ Y_train = Y_train_orig/255.
 Y_test = Y_test_orig/255.
 Y_train = Y_train_orig.T
 Y_test = Y_test_orig.T
-Y_train = convert_to_one_hot(Y_train_orig, 4).T
-Y_test = convert_to_one_hot(Y_test_orig, 4).T
+Y_train = convert_to_one_hot(Y_train_orig, 7).T
+Y_test = convert_to_one_hot(Y_test_orig, 7).T
 
 print ("Número de ejemplos de entrenamiento: " + str(X_train.shape[0]))
 print ("Número de ejemplos de testing: " + str(X_test.shape[0]))
@@ -96,8 +96,8 @@ def initialize_parameters():
         
     #### Haga su código acá ### (≈2 lines)
         
-    W1 = tf.get_variable("W1", [4, 4, 3,8], initializer = tf.contrib.layers.xavier_initializer(seed = 0))
-    W2 = tf.get_variable("W2", [2, 2, 8, 16], initializer = tf.contrib.layers.xavier_initializer(seed = 0))
+    W1 = tf.get_variable("W1", [4, 4, 3, 32], initializer = tf.contrib.layers.xavier_initializer(seed = 0))
+    W2 = tf.get_variable("W2", [2, 2, 32, 48], initializer = tf.contrib.layers.xavier_initializer(seed = 0))
     
     ### Fin ###
 
@@ -177,9 +177,9 @@ def forward_propagation(X, parameters):
     
 #    # FULLY-CONNECTED without non-linear activation function (not not call softmax).
 #    # 6 neurons in output layer. Hint: one of the arguments should be "activation_fn=None" 
+    Z3 = tf.contrib.layers.fully_connected(F, 30, None)
     
-    Z3 = tf.contrib.layers.fully_connected(F, 20, None)
-    Z4 = tf.contrib.layers.fully_connected(Z3, 4, None)
+    Z4 = tf.contrib.layers.fully_connected(Z3, 7, None)
     
     ### Fin ###
 
@@ -248,7 +248,7 @@ def compute_cost(Z4, Y):
 #######################################################
     
  
-def model(X_train, Y_train, X_test, Y_test, learning_rate = 0.009, num_epochs = 450, minibatch_size = 16, print_cost = True):
+def model(X_train, Y_train, X_test, Y_test, learning_rate = 0.009, num_epochs = 300, minibatch_size = 16, print_cost = True):
     """
     Implementa una Red Neuronal Convolucional de 3-Capas en Tensorflow:
     CONV2D -> RELU -> MAXPOOL -> CONV2D -> RELU -> MAXPOOL -> FLATTEN -> FULLYCONNECTED
