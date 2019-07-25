@@ -67,8 +67,8 @@ def initialize_parameters():
         
     #### Haga su código acá ### (≈2 lines)
         
-    W1 = tf.get_variable("W1", [4, 4, 3, 32], initializer = tf.contrib.layers.xavier_initializer(seed = 0))
-    W2 = tf.get_variable("W2", [2, 2, 32, 48], initializer = tf.contrib.layers.xavier_initializer(seed = 0))
+    W1 = tf.get_variable("W1", [4, 4, 3, 64], initializer = tf.contrib.layers.xavier_initializer(seed = 0))
+    W2 = tf.get_variable("W2", [2, 2, 64, 128], initializer = tf.contrib.layers.xavier_initializer(seed = 0))
     
     ### Fin ###
 
@@ -150,7 +150,7 @@ def forward_propagation(X, parameters):
 #    # 6 neurons in output layer. Hint: one of the arguments should be "activation_fn=None" 
     Z3 = tf.contrib.layers.fully_connected(F, 30, None)
     
-    Z4 = tf.contrib.layers.fully_connected(Z3, 7, None)
+    Z4 = tf.contrib.layers.fully_connected(Z3, 17, None)
     
     ### Fin ###
 
@@ -258,7 +258,7 @@ img_test = img/255.
 img_test=img_test[np.newaxis,...]
 
 y_label= np.array([2])
-y_label = convert_to_one_hot(y_label, 7).T
+y_label = convert_to_one_hot(y_label, 17).T
 #
 prediccion = model_predict(img_test, y_label)
 
