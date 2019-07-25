@@ -262,3 +262,24 @@ y_label = convert_to_one_hot(y_label, 17).T
 #
 prediccion = model_predict(img_test, y_label)
 
+labels = {
+        0 : 'Lapicero',
+        1: 'Cinta',
+        2: 'Sillas',
+        3: 'Escritorio',
+        4: 'Armario',
+        5: 'Grapadora',
+        6: 'Tijeras',
+        7: 'Impresora',
+        8: 'Marcador',
+        9: 'Fax',
+        10: 'Mouse',
+        11: 'Malentin',
+        12: 'Fotocopiadoras',
+        13: 'Memoria USB',
+        14: 'Monitor',
+        15: 'Libreta',
+        16: 'Agenda',
+        }
+
+print(labels[prediccion[0]])

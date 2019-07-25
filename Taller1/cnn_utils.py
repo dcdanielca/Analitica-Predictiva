@@ -24,7 +24,7 @@ def unpickle(file):
 
 def load_dataset_office():
     
-    hdf5_path = 'dataset_office.h5'
+    hdf5_path = 'datasetCosas.h5'
     subtract_mean = False
     # open the hdf5 file
     hdf5_file = h5py.File(hdf5_path, "r")
@@ -37,11 +37,11 @@ def load_dataset_office():
     
     #
     train_img = np.uint8(hdf5_file["train_img"][0:data_num, ...])
-    val_img = np.uint8(hdf5_file["val_img"][0:data_num, ...])
+    #val_img = np.uint8(hdf5_file["val_img"][0:data_num, ...])
     test_img = np.uint8(hdf5_file["test_img"][0:data_num, ...])
     
     train_labels = np.uint8(hdf5_file["train_labels"][0:data_num, ...])
-    val_labels = np.uint8(hdf5_file["val_labels"][0:data_num, ...])
+    #val_labels = np.uint8(hdf5_file["val_labels"][0:data_num, ...])
     test_labels = np.uint8(hdf5_file["test_labels"][0:data_num, ...])
 
     hdf5_file.close()
