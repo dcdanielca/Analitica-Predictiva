@@ -5,3 +5,6 @@
 Bitzi-Software Image Scraping(Ejecutable)/
 Monitor
 *.h5
+*.csv
+Trabajo_final/dataset/*
+Trabajo_final/dataset.tar.gz
